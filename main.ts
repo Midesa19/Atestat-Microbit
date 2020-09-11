@@ -1,0 +1,67 @@
+input.onButtonPressed(Button.A, function () {
+    if (index == 0) {
+        index = 4
+    } else {
+        index = index - 1
+    }
+})
+input.onButtonPressed(Button.B, function () {
+    if (index == 4) {
+        index = 0
+        isIn = false
+    } else {
+        index = index + 1
+        isIn = false
+    }
+})
+let list = [1, 2, 3, 4, 5]
+let index: number;
+index = 0
+let isIn: boolean;
+isIn = false
+basic.forever(function () {
+    while (index == 0) {
+        if (input.buttonIsPressed(Button.AB) && !(isIn)) {
+            isIn = true
+            basic.pause(500)
+        } else {
+            if (input.buttonIsPressed(Button.AB) && isIn) {
+                isIn = false
+                basic.pause(500)
+            }
+        }
+        if (isIn) {
+            basic.showNumber(input.temperature())
+            basic.pause(500)
+        } else {
+            basic.showNumber(1)
+            basic.pause(250)
+            basic.clearScreen()
+            basic.pause(250)
+        }
+    }
+    while (index == 1) {
+        basic.showNumber(2)
+        basic.pause(250)
+        basic.clearScreen()
+        basic.pause(250)
+    }
+    while (index == 2) {
+        basic.showNumber(3)
+        basic.pause(250)
+        basic.clearScreen()
+        basic.pause(250)
+    }
+    while (index == 3) {
+        basic.showNumber(4)
+        basic.pause(250)
+        basic.clearScreen()
+        basic.pause(250)
+    }
+    while (index == 4) {
+        basic.showNumber(5)
+        basic.pause(250)
+        basic.clearScreen()
+        basic.pause(250)
+    }
+})

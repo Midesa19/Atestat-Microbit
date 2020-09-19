@@ -72,17 +72,17 @@ basic.forever(function () {
         }
         if (isIn) {
             let a: number;
-            input.onGesture(Gesture.Shake, function () {
+input.onGesture(Gesture.Shake, function () {
                 a=randint(0, 2)
             })
-            basic.pause(500)
+basic.pause(500)
             if (a == 0) {
                 basic.showIcon(IconNames.Scissors)
             } else {
                 if (a == 1) {
                     basic.showIcon(IconNames.SmallSquare)
                 } else {
-                    if(a==2)
+                    if (a == 2) {
                         basic.showLeds(`
                             # # # # #
                             # # # # #
@@ -90,6 +90,7 @@ basic.forever(function () {
                             # # # # #
                             # # # # #
                             `)
+                    }
                 }
             }
         } else {

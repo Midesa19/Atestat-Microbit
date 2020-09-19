@@ -14,6 +14,7 @@ input.onButtonPressed(Button.B, function () {
         isIn = false
     }
 })
+radio.setGroup(20)
 let list = [1, 2, 3, 4, 5]
 let index: number;
 index = 0
@@ -72,10 +73,10 @@ basic.forever(function () {
         }
         if (isIn) {
             let a: number;
-input.onGesture(Gesture.Shake, function () {
+            input.onGesture(Gesture.Shake, function () {
                 a=randint(0, 2)
             })
-basic.pause(500)
+            basic.pause(500)
             if (a == 0) {
                 basic.showIcon(IconNames.Scissors)
             } else {
@@ -101,10 +102,32 @@ basic.pause(500)
         }
     }
     while (index == 3) {
-        basic.showNumber(4)
-        basic.pause(250)
-        basic.clearScreen()
-        basic.pause(250)
+        if (input.buttonIsPressed(Button.AB) && !(isIn)) {
+            isIn = true
+            basic.pause(500)
+        } else {
+            if (input.buttonIsPressed(Button.AB) && isIn) {
+                isIn = false
+                basic.pause(500)
+            }
+        }
+        if (!isIn) {
+            basic.showNumber(4)
+            basic.pause(250)
+            basic.clearScreen()
+            basic.pause(250)
+        }
+        else{
+            if(input.isGesture(Gesture.Shake)){
+                basic.clearScreen()
+                radio.sendString("DUCK")
+            }
+            else{
+                radio.onReceivedStringDeprecated(function (receivedString) {
+                    basic.showIcon(IconNames.Duck)            
+                })
+            }
+        }
     }
     while (index == 4) {
         basic.showNumber(5)
@@ -113,3 +136,4 @@ basic.pause(500)
         basic.pause(250)
     }
 })
+

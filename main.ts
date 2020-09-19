@@ -113,23 +113,45 @@ basic.pause(500)
                 basic.pause(500)
             }
         }
-        if (!(isIn)) {
+        if (isIn) {
+            let miner=game.createSprite(2, 2)
+            let gold=game.createSprite(randint(0, 4), randint(0, 4))
+            let score=0;
+            while(score<10){
+                if(miner.x()==gold.x() && miner.y()==gold.y()){
+                    score=score+1
+                    gold.set(LedSpriteProperty.X, randint(0,4))
+                    gold.set(LedSpriteProperty.Y, randint(0,4))
+                }
+                if(input.acceleration(Dimension.X)>200){
+                    miner.changeXBy(1)
+                    basic.pause(100)
+                }
+                if(input.acceleration(Dimension.X)<200){
+                    miner.changeXBy(-1)
+                    basic.pause(100)
+                }
+                if(input.acceleration(Dimension.Y)>200){
+                    miner.changeYBy(1)
+                    basic.pause(100)
+                }
+                if(input.acceleration(Dimension.Y)<200){
+                    miner.changeYBy(-1)
+                    basic.pause(100)
+                }
+            }
+        
+            gold.delete()
+            miner.delete()
+            basic.showIcon(IconNames.Happy)
+            basic.pause(1000)
+        } 
+        else {
             basic.showNumber(4)
             basic.pause(250)
             basic.clearScreen()
             basic.pause(250)
-        } /*else {
-            if (input.isGesture(Gesture.Shake)) {
-                radio.sendString("DUCK")
-            } else {
-                radio.onReceivedStringDeprecated(function (receivedString) {
-                       duckie = true
-                })
-            }
-            if (duckie) {
-                basic.showIcon(IconNames.Duck)
-            }
-        }*/
+        }
     }
     while (index == 4) {
         if (input.buttonIsPressed(Button.AB) && !(isIn)) {
@@ -181,8 +203,10 @@ basic.pause(500)
                 }    
 
             }
-            basic.showString("Sfarsit joc")
+            
             cupcake.delete()
+            basic.showIcon(IconNames.Sad)
+            basic.pause(1000)
         } 
         else{
             basic.showNumber(5)

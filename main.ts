@@ -19,6 +19,8 @@ let list = [1, 2, 3, 4, 5]
 let index: number;
 index = 0
 let isIn: boolean;
+let duckie: boolean;
+duckie = false
 isIn = false
 basic.forever(function () {
     while (index == 0) {
@@ -73,10 +75,10 @@ basic.forever(function () {
         }
         if (isIn) {
             let a: number;
-            input.onGesture(Gesture.Shake, function () {
+input.onGesture(Gesture.Shake, function () {
                 a=randint(0, 2)
             })
-            basic.pause(500)
+basic.pause(500)
             if (a == 0) {
                 basic.showIcon(IconNames.Scissors)
             } else {
@@ -111,29 +113,82 @@ basic.forever(function () {
                 basic.pause(500)
             }
         }
-        if (!isIn) {
+        if (!(isIn)) {
             basic.showNumber(4)
             basic.pause(250)
             basic.clearScreen()
             basic.pause(250)
-        }
-        else{
-            if(input.isGesture(Gesture.Shake)){
-                basic.clearScreen()
+        } /*else {
+            if (input.isGesture(Gesture.Shake)) {
                 radio.sendString("DUCK")
-            }
-            else{
+            } else {
                 radio.onReceivedStringDeprecated(function (receivedString) {
-                    basic.showIcon(IconNames.Duck)            
+                       duckie = true
                 })
             }
-        }
+            if (duckie) {
+                basic.showIcon(IconNames.Duck)
+            }
+        }*/
     }
     while (index == 4) {
-        basic.showNumber(5)
-        basic.pause(250)
-        basic.clearScreen()
-        basic.pause(250)
+        if (input.buttonIsPressed(Button.AB) && !(isIn)) {
+            isIn = true
+            basic.pause(500)
+        } else {
+            if (input.buttonIsPressed(Button.AB) && isIn) {
+                isIn = false
+                basic.pause(500)
+            }
+        }
+        if (isIn) {
+        	basic.showString("3-2-1-START")
+            let cupcake=game.createSprite(2, 2)
+            let cupcakeOnPlate=true;
+            let tolerance=200
+            while(cupcakeOnPlate){
+                if(input.acceleration(Dimension.X)>tolerance){
+                    if(cupcake.x()==4)
+                        cupcakeOnPlate=false
+                    else{
+                        cupcake.changeXBy(1)
+                        basic.pause(200)
+                    }
+                }
+                if(input.acceleration(Dimension.X)<(-1)*tolerance){
+                    if(cupcake.x()==0)
+                        cupcakeOnPlate=false
+                    else{
+                        cupcake.changeXBy(-1)
+                        basic.pause(200)
+                    }
+                }
+                if(input.acceleration(Dimension.Y)>tolerance){
+                    if(cupcake.y()==4)
+                        cupcakeOnPlate=false
+                    else{
+                        cupcake.changeYBy(1)
+                        basic.pause(200)
+                    }
+                }
+                if(input.acceleration(Dimension.Y)<(-1)*tolerance){
+                    if(cupcake.y()==0)
+                        cupcakeOnPlate=false
+                    else{
+                        cupcake.changeYBy(-1)
+                        basic.pause(200)
+                    }
+                }    
+
+            }
+            basic.showString("Sfarsit joc")
+            cupcake.delete()
+        } 
+        else{
+            basic.showNumber(5)
+            basic.pause(250)
+            basic.clearScreen()
+            basic.pause(250)
+        }
     }
 })
-

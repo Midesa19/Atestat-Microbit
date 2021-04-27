@@ -16,11 +16,10 @@ input.onButtonPressed(Button.B, function () {
 })
 let tolerance = 0
 let cupcakeOnPlate = false
-let cupcake: game.LedSprite = null
 let score = 0
-let gold: game.LedSprite = null
 let miner: game.LedSprite = null
-radio.setGroup(20)
+let gold: game.LedSprite = null
+let cupcake: game.LedSprite = null
 let list = [1, 2, 3, 4, 5]
 let index: number;
 index = 0
